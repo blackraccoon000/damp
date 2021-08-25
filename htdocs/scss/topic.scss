@@ -1,0 +1,19 @@
+.min-w-100 {
+  min-width: 100px;
+}
+
+.likes-green {
+  color: $cLikesGreen;
+}
+
+.dislikes-red {
+  color: $cDislikesRed;
+}
+
+.topic-hover-action {
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    @extend .shadow;
+  }
+}

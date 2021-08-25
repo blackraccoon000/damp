@@ -1,0 +1,39 @@
+<?php
+require_once 'config.php';
+
+// libraryの読み込み
+require_once SOURCE_BASE . 'libs/helper.php';
+require_once SOURCE_BASE . 'libs/auth.php';
+require_once SOURCE_BASE . 'libs/router.php';
+
+// modelの読み込み
+require_once SOURCE_BASE . 'models/abstract.model.php';
+require_once SOURCE_BASE . 'models/user.model.php';
+
+// messageの読み込み + models/abstract.model.phpが必要
+require_once SOURCE_BASE . 'libs/message.php';
+
+// dbとの接続
+require_once SOURCE_BASE . 'db/data_source.php';
+require_once SOURCE_BASE . 'db/user.query.php';
+
+// session_startを呼び出す modelの前だとerror
+session_start();
+
+try {
+    require_once SOURCE_BASE . 'partials/header.php';
+
+    // 先頭行の"/"を消去、リンクに存在する"?"文字列を削除
+    // クエリ文字列を使うなら、この辺りを調節しないと問題が発生する。
+    $rPath = preg_replace("/(^\/|\?)/i", '', $_SERVER['REQUEST_URI']);
+    $method = strtolower($_SERVER['REQUEST_METHOD']);
+    $a = preg_replace("/\?/i", '', $_SERVER['REQUEST_URI']);
+
+    libs\route($rPath, $method);
+
+    require_once SOURCE_BASE . 'partials/footer.php';
+} catch (\Throwable $th) {
+    die('<h1>致命的なエラーです。</h1><p>サーバ管理者へ連絡ください</p>');
+}
+
+?>

@@ -1,0 +1,61 @@
+version: '2.4'
+
+services:
+  mysql:
+    container_name: mysql
+    platform: linux/x86_64 # M1チップ対応のため追記
+    image: mysql:8.0.23
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/sql:/docker-entrypoint-initdb.d
+    # restart: always # 自動起動
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "pollapp"
+      MYSQL_USER: "test_user"
+      MYSQL_PASSWORD: "pwd"
+      TZ: 'Asia/Tokyo'
+
+  phpmyadmin:
+    container_name: pma
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    # restart: always # 自動起動
+    ports:
+      - "8080:80"
+
+  php-apache: # PHP & Apache
+    container_name: web
+    build: ./docker/php
+    environment:
+      PHP_EXTENTION_XDEBUG: 1
+    volumes:
+      - ./htdocs:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php/xdebug.log:/var/log/xdebug.log
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    # restart: always # 自動起動
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+
+# build用コンテナを作ろうと思ったが、うまくいかない。
+# 何か起動させる必要があるが、それが思いつかない。
+#   nodejs: # scss & js build用コンテナ
+#     container_name: nodejs
+#     build:
+#       context: . # build用のpathを変更
+#       dockerfile: ./docker/nodejs/Dockerfile
+#     volumes:
+#       - .:/app
+#       - nmv:/app/node_modules
+#     environment:
+#       - NODE_ENV=development
+
+# volumes:
+#   nmv:

@@ -1,0 +1,26 @@
+{
+  "name": "php-training",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/blackraccoon000/php-training.git",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --write",
+    "sass:watch": "sass htdocs/scss/style.scss htdocs/css/style.css --watch",
+    "sass": "sass htdocs/scss/style.scss htdocs/css/style.css",
+    "sass:dev": "sass htdocs/scss/style.scss htdocs/css/style.css --style expanded --watch | postcss --use autoprefixer -b 'last 10 versions' htdocs/css/style.css -o htdocs/css/style.css",
+    "sass:prod": "sass htdocs/scss/style.scss htdocs/css/style.css  --style compressed | postcss --use autoprefixer -b 'last 10 versions' htdocs/css/style.css -o htdocs/css/style.css"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.17.3",
+    "autoprefixer": "^10.3.1",
+    "fibers": "^5.0.0",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
+    "prettier": "^2.3.2",
+    "sass": "^1.37.5"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "php-apache_xdebug_app",
+    "dockerComposeFile": [
+        "../docker-compose.yml",
+    ],
+    "service": "php-apache",
+    // コンテナ内の作業するパス
+    "workspaceFolder": "/var/www/html",
+    "forwardPorts": [
+        9003
+    ],
+    "extensions": [
+        "felixfbecker.php-debug",
+        "coenraads.bracket-pair-colorizer-2",
+        "oderwat.indent-rainbow",
+        "streetsidesoftware.code-spell-checker",
+        "mosapride.zenkaku"
+    ]
+}
