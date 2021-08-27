@@ -8,8 +8,11 @@
 // _reboot.scssで定義されている情報の上書き
 @import 'override';
 
-// loginに関するSCSS
-@import 'login';
+// signinに関するSCSS
+@import 'signin';
+
+// registerに関するSCSS
+@import 'register';
 
 // topicに関するSCSS
 @import 'topic';

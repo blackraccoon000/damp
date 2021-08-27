@@ -11120,8 +11120,16 @@ a {
   text-decoration: none;
 }
 
-.login-form {
+.signin-form {
   width: 300px;
+}
+
+.register-form {
+  width: 300px;
+}
+
+#chart {
+  background-color: gray;
 }
 
 .min-w-100 {

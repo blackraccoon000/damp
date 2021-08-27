@@ -7,7 +7,7 @@ use models\UserModel;
 
 function get()
 {
-    require_once SOURCE_BASE . 'views/signin.php';
+    \views\signin\index();
 }
 
 function post()

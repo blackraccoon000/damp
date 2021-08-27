@@ -1,5 +1,6 @@
 RewriteEngine On
 
+# リダイレクト用 ファイル/ディレクトリが存在しない場合 index.phpに転送
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.php

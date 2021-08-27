@@ -17,11 +17,20 @@ require_once SOURCE_BASE . 'libs/message.php';
 require_once SOURCE_BASE . 'db/data_source.php';
 require_once SOURCE_BASE . 'db/user.query.php';
 
+// partialsとの接続
+require_once SOURCE_BASE . 'partials/header.php';
+require_once SOURCE_BASE . 'partials/footer.php';
+
+// viewsとの接続
+require_once SOURCE_BASE . 'views/signin.php';
+require_once SOURCE_BASE . 'views/register.php';
+
+
 // session_startを呼び出す modelの前だとerror
 session_start();
 
 try {
-    require_once SOURCE_BASE . 'partials/header.php';
+    \partials\header();
 
     // 先頭行の"/"を消去、リンクに存在する"?"文字列を削除
     // クエリ文字列を使うなら、この辺りを調節しないと問題が発生する。
@@ -31,7 +40,7 @@ try {
 
     libs\route($rPath, $method);
 
-    require_once SOURCE_BASE . 'partials/footer.php';
+    \partials\footer();
 } catch (\Throwable $th) {
     die('<h1>致命的なエラーです。</h1><p>サーバ管理者へ連絡ください</p>');
 }

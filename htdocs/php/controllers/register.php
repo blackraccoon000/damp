@@ -7,7 +7,7 @@ use libs\Msg;
 
 function get()
 {
-    require_once SOURCE_BASE . 'views/register.php';
+    \views\register\index();
 }
 
 function post()

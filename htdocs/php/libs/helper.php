@@ -11,12 +11,16 @@ class Helper
         return $ary[$key] ?? $default_val;
     }
 
+    public static function the_url($path) {
+        echo static::get_url($path);
+    }
+
     /**
      * @return string filePath
      */
     public static function get_url(string $path)
     {
-        return BASE_CONTEXT_PATH . $path;
+        return BASE_CONTEXT_PATH . trim($path, "/");
     }
 
     /**

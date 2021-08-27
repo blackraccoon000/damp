@@ -6,27 +6,38 @@ services:
     platform: linux/x86_64 # M1チップ対応のため追記
     image: mysql:8.0.23
     volumes:
-      - ./docker/mysql/data:/var/lib/mysql
+      - damp-mysql-data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/mysql/sql:/docker-entrypoint-initdb.d
     # restart: always # 自動起動
+    env_file:
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD: "password"
-      MYSQL_DATABASE: "pollapp"
-      MYSQL_USER: "test_user"
-      MYSQL_PASSWORD: "pwd"
+    # .envファイルからパスワード情報など取得
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: 'Asia/Tokyo'
-
-  phpmyadmin:
-    container_name: pma
-    depends_on:
-      - mysql
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: mysql
-    # restart: always # 自動起動
+    # 本番環境では不要
     ports:
-      - "8080:80"
+      - "3306:3306"
+    tty: true
+    networks:
+      - damp-network
+
+
+# 欲しかったらコメントアウトする
+  # phpmyadmin:
+  #   container_name: pma
+  #   depends_on:
+  #     - mysql
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #     PMA_HOST: mysql
+  #   # restart: always # 自動起動
+  #   ports:
+  #     - "8080:80"
 
   php-apache: # PHP & Apache
     container_name: web
@@ -43,6 +54,8 @@ services:
       - "80:80"
     depends_on:
       - mysql
+    networks:
+      - damp-network
 
 # build用コンテナを作ろうと思ったが、うまくいかない。
 # 何か起動させる必要があるが、それが思いつかない。
@@ -57,5 +70,12 @@ services:
 #     environment:
 #       - NODE_ENV=development
 
-# volumes:
-#   nmv:
+volumes:
+  damp-mysql-data:
+  # nmv:
+
+# 事前に作成する
+# sudo docker network create damp-network
+networks:
+    damp-network:
+        external: true

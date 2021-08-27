@@ -8,9 +8,14 @@ function route($rPath, $method)
         if ($rPath === '') {
             $rPath = 'home';
         }
-        echo "$rPath:".$rPath;
-        $targetFile = SOURCE_BASE . "controllers/{$rPath}.php";
-        echo "target_file_path:".$targetFile;
+        if($rPath === 'favicon.ico') {
+            return;
+        } else {
+            $targetFile = SOURCE_BASE . "controllers/{$rPath}.php";
+        }
+
+        // $targetFile = SOURCE_BASE . "controllers/{$rPath}.php";
+        // echo "target_file_path:".$targetFile;
         // echo CURRENT_URI;
         if (!file_exists($targetFile)) {
             Msg::push(Msg::ERROR, $targetFile);
@@ -22,8 +27,9 @@ function route($rPath, $method)
             $rPath = str_replace('/', '\\', $rPath);
         }
         $fn = "\\controllers\\{$rPath}\\{$method}";
-        Msg::push(Msg::ERROR, $fn);
+        // Msg::push(Msg::ERROR, $fn);
         $fn();
+
     } catch (Throwable $th) {
         Msg::push(Msg::DEBUG, $th->getMessage());
         Msg::push(Msg::ERROR, '何か問題が発生しました');
