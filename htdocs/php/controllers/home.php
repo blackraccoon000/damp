@@ -1,10 +1,13 @@
 <?php
-
 namespace controllers\home;
+use libs\Auth;
+use db\TopicQuery;
 
 function get()
 {
-    require_once SOURCE_BASE . 'views/home.php';
+    // Auth::requireSignIn();
+    $topics = TopicQuery::fetchPublishedTopics();
+    \views\home\index($topics);
 }
 
 function post()

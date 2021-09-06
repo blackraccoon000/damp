@@ -1,10 +1,10 @@
-# MVC アーキテクチャ
+\*\*\*\*# MVC アーキテクチャ
 
 Model -> データの管理を担当。
 View -> 画面の入出力を担当。
 Controller -> ビジネスロジックを担当。
 
-# mysqlのログ
+# mysql のログ
 
 ```
 mysql>
@@ -36,15 +36,16 @@ mysql> show variables like 'general_log%'
 mysql>
 ```
 
-# mysqlに外部接続する方法
+# mysql に外部接続する方法
 
-dockerの設定は下記
+docker の設定は下記
 
 https://urashita.com/archives/33721
 
-JDBCドライバの設定を下記に設定
+JDBC ドライバの設定を下記に設定
 allowPublicKeyRetrieval true / useSSL false
 
 # 複数ネットワークの設定
+
 今後はこの辺りも履修予定
 https://docs.docker.jp/compose/networking.html

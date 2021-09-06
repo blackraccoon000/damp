@@ -9,6 +9,8 @@ require_once SOURCE_BASE . 'libs/router.php';
 // modelの読み込み
 require_once SOURCE_BASE . 'models/abstract.model.php';
 require_once SOURCE_BASE . 'models/user.model.php';
+require_once SOURCE_BASE . 'models/topic.model.php';
+require_once SOURCE_BASE . 'models/comment.model.php';
 
 // messageの読み込み + models/abstract.model.phpが必要
 require_once SOURCE_BASE . 'libs/message.php';
@@ -16,14 +18,25 @@ require_once SOURCE_BASE . 'libs/message.php';
 // dbとの接続
 require_once SOURCE_BASE . 'db/data_source.php';
 require_once SOURCE_BASE . 'db/user.query.php';
+require_once SOURCE_BASE . 'db/topic.query.php';
+require_once SOURCE_BASE . 'db/comment.query.php';
 
 // partialsとの接続
 require_once SOURCE_BASE . 'partials/header.php';
 require_once SOURCE_BASE . 'partials/footer.php';
+require_once SOURCE_BASE . 'partials/topic-list-item.php';
+require_once SOURCE_BASE . 'partials/chart.php';
+require_once SOURCE_BASE . 'partials/topic-main.php';
+require_once SOURCE_BASE . 'partials/topic-header-item.php';
+require_once SOURCE_BASE . 'partials/topic-comment-form.php';
+require_once SOURCE_BASE . 'partials/comments/auth-true.php';
+require_once SOURCE_BASE . 'partials/comments/auth-false.php';
 
 // viewsとの接続
+require_once SOURCE_BASE . 'views/home.php';
 require_once SOURCE_BASE . 'views/signin.php';
 require_once SOURCE_BASE . 'views/register.php';
+require_once SOURCE_BASE . 'views/topic/archive.php';
 
 
 // session_startを呼び出す modelの前だとerror

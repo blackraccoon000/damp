@@ -82,6 +82,9 @@ class Auth
         return $is_success;
     }
 
+    /**
+     * ユーザがサインイン状態かを確認する
+     */
     public static function isSignIn()
     {
         try {
@@ -102,6 +105,9 @@ class Auth
         }
     }
 
+    /**
+     * ユーザのサインアウトを実施
+     */
     public static function signOut()
     {
         try {
@@ -112,6 +118,13 @@ class Auth
             return false;
         }
         return true;
+    }
+
+    public static function requireSignIn() {
+        if(!static::isSignIn()) {
+            Msg::push(Msg::ERROR, "サインインしてください。");
+            Helper::redirect("signin");
+        }
     }
 }
 ?>

@@ -1,24 +1,24 @@
+<?php
+  namespace views\home;
+  use libs\Helper;
+  use partials;
+?>
 <div class="container">
-  <h1 class="visually-hidden">home directory</h1>
-  <h3>GET</h3>
-  <form action="<?php echo BASE_CONTEXT_PATH; ?>signin" method="GET">
-    <input type="submit" value="signin" />
-  </form>
-  <form action="<?php echo BASE_CONTEXT_PATH; ?>register" method="GET">
-    <input type="submit" value="Register" />
-  </form>
-  <form action="<?php echo BASE_CONTEXT_PATH; ?>home" method="GET">
-    <input type="submit" value="Home" />
-  </form>
-
-  <h3 class="mt-3">POST</h3>
-  <form action="<?php echo BASE_CONTEXT_PATH; ?>signin" method="POST">
-    <input type="submit" value="signin" />
-  </form>
-  <form action="<?php echo BASE_CONTEXT_PATH; ?>register" method="POST">
-    <input type="submit" value="Register" />
-  </form>
-  <form action="<?php echo BASE_CONTEXT_PATH; ?>home" method="POST">
-    <input type="submit" value="Home" />
-  </form>
+<h1 class="visually-hidden">home directory</h1>
+  <?php
+    function index($topics) {
+      $topic = array_shift($topics);
+      \partials\topicHeaderItem($topic,true);
+  ?>
+  <ul class="container">
+      <?php
+        foreach($topics as $topic) {
+          $title_url = Helper::get_url("topic/detail?topic_id=".$topic->id);
+          partials\topicListItem($topic,$title_url,false);
+        }
+      ?>
+  </ul>
+  <?php
+    };
+  ?>
 </div>

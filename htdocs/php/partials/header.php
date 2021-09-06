@@ -23,11 +23,11 @@
 <div id="container">
   <header class="container my-2">
     <?php
-    if (Auth::isSignIn()) {
-        echo '<p>ログイン中です。</p><a href="/signout">signout</a>';
-    } else {
-        echo '<p>ログインしていません。</p>';
-    }
+    // if (Auth::isSignIn()) {
+    //     echo '<p>ログイン中です。</p><a href="/signout">signout</a>';
+    // } else {
+    //     echo '<p>ログインしていません。</p>';
+    // }
     ?>
     <nav class="row align-items-center py-2">
       <a href="<?php Helper::the_url("/") ?>" class="col-md d-flex align-items-center mb-3 mb-md-0">
@@ -36,21 +36,21 @@
       </a>
       <div class="col-md-auto">
         <?php
-          if (true) :
+          if (Auth::isSignIn()) :
         ?>
-        <!-- サインイン前の場合下記 -->
-        <div class="mb-2">
-          <a href="<?php Helper::the_url("register") ?>" class="btn btn-primary me-2">登録</a>
-          <a href="<?php Helper::the_url("signin") ?>" >サインイン</a>
+        <?php // サインイン済みの場合下記 ?>
+        <div>
+          <a href="<?php Helper::the_url("topic/create") ?>" class="btn btn-primary me-2">投稿</a>
+          <a href="<?php Helper::the_url("topic/archive") ?>" class="me-2">過去の投稿</a>
+          <a href="<?php Helper::the_url("signout") ?>" >サインアウト</a>
         </div>
         <?php
           else:
         ?>
-        <!-- サインイン済みの場合下記 -->
-        <div>
-          <a href="<?php Helper::the_url("/topic/create") ?>" class="btn btn-primary me-2">投稿</a>
-          <a href="<?php Helper::the_url("/topic/archive") ?>" class="me-2">過去の投稿</a>
-          <a href="<?php Helper::the_url("signout") ?>" >サインアウト</a>
+        <?php // サインイン前の場合下記 ?>
+        <div class="mb-2">
+          <a href="<?php Helper::the_url("register") ?>" class="btn btn-primary me-2">登録</a>
+          <a href="<?php Helper::the_url("signin") ?>" >サインイン</a>
         </div>
         <?php
           endif;

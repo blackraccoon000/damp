@@ -52,10 +52,10 @@ class UserModel extends AbstractModel
             Msg::push(Msg::ERROR, 'パスワードを入力してください。');
             $res = false;
         } else {
-            if (strlen($val) <= 4) {
-                Msg::push(Msg::ERROR, 'パスワードは4桁以上で入力してください');
-                $res = false;
-            }
+            // if (strlen($val) <= 4) {
+            //     Msg::push(Msg::ERROR, 'パスワードは4桁以上で入力してください');
+            //     $res = false;
+            // }
             if (!Helper::isAlNum($val)) {
                 Msg::push(
                     Msg::ERROR,
