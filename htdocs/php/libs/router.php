@@ -5,13 +5,13 @@ use Throwable;
 function route($rPath, $method)
 {
     try {
-        if ($rPath === '') {
-            $rPath = 'home';
+        if ($rPath === '/') {
+            $rPath = '/home';
         }
-        if($rPath === 'favicon.ico') {
+        if($rPath === '/favicon.ico') {
             return;
         } else {
-            $targetFile = SOURCE_BASE . "controllers/{$rPath}.php";
+            $targetFile = SOURCE_BASE . "controllers{$rPath}.php";
         }
 
         // $targetFile = SOURCE_BASE . "controllers/{$rPath}.php";
@@ -23,10 +23,11 @@ function route($rPath, $method)
             return;
         }
         require_once $targetFile;
-        if (strpos($rPath, '/')) {
+        $chk = strpos($rPath, '/') === 0 ? 1 : false;
+        if ($chk) {
             $rPath = str_replace('/', '\\', $rPath);
         }
-        $fn = "\\controllers\\{$rPath}\\{$method}";
+        $fn = "\\controllers{$rPath}\\{$method}";
         // Msg::push(Msg::ERROR, $fn);
         $fn();
 

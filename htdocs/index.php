@@ -37,6 +37,7 @@ require_once SOURCE_BASE . 'views/home.php';
 require_once SOURCE_BASE . 'views/signin.php';
 require_once SOURCE_BASE . 'views/register.php';
 require_once SOURCE_BASE . 'views/topic/archive.php';
+require_once SOURCE_BASE . 'views/topic/detail.php';
 
 
 // session_startを呼び出す modelの前だとerror
@@ -47,9 +48,12 @@ try {
 
     // 先頭行の"/"を消去、リンクに存在する"?"文字列を削除
     // クエリ文字列を使うなら、この辺りを調節しないと問題が発生する。
-    $rPath = preg_replace("/(^\/|\?)/i", '', $_SERVER['REQUEST_URI']);
+    $url = parse_url(CURRENT_URI);
+    // $rPath = preg_replace("/(^\/|\?)/i", '', $_SERVER['REQUEST_URI']);
+    // $rPath = str_replace(BASE_CONTEXT_PATH, "", $url["path"]);
+    $rPath = $url["path"];
     $method = strtolower($_SERVER['REQUEST_METHOD']);
-    $a = preg_replace("/\?/i", '', $_SERVER['REQUEST_URI']);
+    // $a = preg_replace("/\?/i", '', $_SERVER['REQUEST_URI']);
 
     libs\route($rPath, $method);
 
